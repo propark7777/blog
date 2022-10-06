@@ -13,17 +13,17 @@
     <div class="py-5 text-center">
         <h2 style="color: #FFBF00"><b>Register your plan !</b></h2>
     </div>
-    <form>
+    <form action="main.html" th:action method="post">
         <div class="form-floating">
             <input type="text" id="exerciseName" name="exerciseName" class="form-control mb-3" placeholder="운동명을 입력하세요">
             <label for="exerciseName">운동명</label>
         </div>
         <div class="form-floating">
-            <input type="text" id="set-Number" name="exerciseName" class="form-control mb-3" placeholder="세트 수를 입력하세요">
+            <input type="text" id="set-Number" name="exerciseSetNumber" class="form-control mb-3" placeholder="세트 수를 입력하세요">
             <label for="set-Number">목표 세트</label>
         </div>
         <div class="form-floating">
-            <input type="text" id="repetition" name="exerciseName" class="form-control mb-3" placeholder="1세트당 횟수를 입력하세요">
+            <input type="text" id="repetition" name="exerciseRepetition" class="form-control mb-3" placeholder="1세트당 횟수를 입력하세요">
             <label for="repetition">세트당 횟수 </label>
         </div>
         <hr class="my-4">

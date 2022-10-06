@@ -8,20 +8,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.sql.DataSource;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.support.JdbcUtils;
+import org.springframework.stereotype.Repository;
 
 @Slf4j
+@RequiredArgsConstructor
+@Repository
 public class PlanRepositoryV1 {
     private final DataSource dataSource;
 
-    public PlanRepositoryV1(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     public Plan savePlan(Plan plan) throws SQLException {
-        String sql =
-            "insert into plan(exercise_name,exercise_set_number,exercise_repetition) values(?,?,?)";
+        String sql = "insert into plan(exercise_name,exercise_set_number,exercise_repetition) values(?,?,?)";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -29,10 +29,12 @@ public class PlanRepositoryV1 {
 
         try {
             conn = getConnection();
+            log.info("logInfo ****************");
             pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,plan.getExerciseName());
             pstmt.setInt(2,plan.getExerciseSetNumber());
             pstmt.setInt(3,plan.getExerciseRepetition());
+            log.info("세트 갯수: {}",plan.getExerciseSetNumber());
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
@@ -57,7 +59,8 @@ public class PlanRepositoryV1 {
     }
 
     private Connection getConnection() throws SQLException {
-        Connection conn = dataSource.getConnection();
+        //Connection conn = dataSource.getConnection();
+        Connection conn = DataSourceUtils.getConnection(dataSource);
         log.info("get Connection = {} class = {}",conn,conn.getClass());
         return conn;
     }
