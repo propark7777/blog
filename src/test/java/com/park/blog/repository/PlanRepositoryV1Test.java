@@ -9,6 +9,7 @@ import com.park.blog.domain.plan.Plan;
 import com.zaxxer.hikari.HikariDataSource;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,10 +71,11 @@ class PlanRepositoryV1Test {
     @Test
     @DisplayName("운동계획 지우기")
     void delete() throws SQLException {
-        Plan findPlan = repository.findPlanByExerciseId(37L);
+        Plan findPlan = repository.findPlanByExerciseId(40L);
         log.info("{}",findPlan.toString());
         repository.deletePlan(findPlan.getExerciseId());
 
-        assertThat(repository.findAllPlan().size()).isEqualTo(0);
+        assertThatThrownBy(()->repository.findPlanByExerciseId(findPlan.getExerciseId()))
+            .isInstanceOf(NoSuchElementException.class);
     }
 }
