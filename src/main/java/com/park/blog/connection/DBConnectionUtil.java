@@ -14,7 +14,6 @@ public class DBConnectionUtil {
 
     public static Connection getConnection() {
         try {
-            log.info("aaaaa");
             Connection connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
             log.info("get Connection={}, class={}",connection,connection.getClass());
             return connection;

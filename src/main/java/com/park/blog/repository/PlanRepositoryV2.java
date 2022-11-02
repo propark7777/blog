@@ -29,15 +29,16 @@ public class PlanRepositoryV2 implements PlanRepository{
 
     public Plan findPlanByExerciseId(Long exerciseId) {
         String sql = "select * from plan where exercise_id = ?";
+        log.info("exerciseId = {}", exerciseId);
         return template.queryForObject(sql,planRowMapper(),exerciseId);
     }
 
     public void updatePlan(Long exerciseId, Plan plan) {
         String sql = "update plan set exercise_name=? , exercise_set_number=? ," +
             "exercise_repetition=? where exercise_id = ?";
-
+        log.info("V2updatePlan = {}",plan);
         template.update(sql,plan.getExerciseName(),plan.getExerciseSetNumber(),
-            plan.getExerciseRepetition(),plan.getExerciseId());
+            plan.getExerciseRepetition(),exerciseId);
     }
 
     public void deletePlan(Long exerciseId) {
