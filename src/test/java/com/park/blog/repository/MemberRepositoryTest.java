@@ -34,4 +34,15 @@ class MemberRepositoryTest {
         Member saveMember = memberRepository.saveMember(member);
         assertThat(saveMember).isEqualTo(member);
     }
+
+    @Test
+    void deleteMember() {
+        memberRepository.deleteMember("hahahagh1");
+    }
+
+    @Test
+    void updateMember() {
+        Member member = new Member("aaa","Lee","1234","vv@naver.com");
+        memberRepository.updateMember("hahahagh",member);
+    }
 }
