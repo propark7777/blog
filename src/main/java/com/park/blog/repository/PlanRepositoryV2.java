@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Slf4j
+@Repository
 public class PlanRepositoryV2 implements PlanRepository{
     private final JdbcTemplate template;
 
