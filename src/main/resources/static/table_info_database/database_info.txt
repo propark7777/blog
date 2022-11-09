@@ -6,3 +6,10 @@ create table Member (
 	email varchar(255) not null,
 	primary key (id)
 );
+
+drop table if exists DailyCheckForm CASCADE;
+create table DailyCheck (
+    dailyCheckId Long auto_increment,
+    dailyCheckName varchar (30) not null,
+    primary key(dailyCheckId)
+);
